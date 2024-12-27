@@ -5,8 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
-import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -163,7 +161,7 @@ public class FAFPanel extends JPanel {
 
 	public int[][] generateRandom2DArray() {
 		// Step 1: Create a list of numbers 1 to 6, each appearing twice
-		List<Integer> numbers = new ArrayList<>();
+		ArrayList<Integer> numbers = new ArrayList<>();
 		for (int i = 1; i <= (this.x * this.y) / 2; i++) {
 			numbers.add(i);
 			numbers.add(i);
