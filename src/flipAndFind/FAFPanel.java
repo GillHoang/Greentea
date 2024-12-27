@@ -19,10 +19,11 @@ public class FAFPanel extends JPanel {
 	String allGameMode[] = { "Easy", "Medium", "Hard" };
 	ArrayList<JButton> cards;
 	Timer timer1;
-	JTextField mode;
+	Timer timer3;
+	JTextField time;
 	JTextField attempts;
 	JTextField pairsLeft;
-	JButton menu;
+	JTextField point;
 	JButton selected;
 	int[][] amountImagePerLevel = { { 3, 4 } };
 	int[][] result;
@@ -30,6 +31,8 @@ public class FAFPanel extends JPanel {
 	int y;
 	int attemptsLeft;
 	int numPairsLeft;
+	int numPoint = 1000;
+	int timeLeft = 60;
 
 	public FAFPanel() {
 		super(null);
@@ -42,12 +45,10 @@ public class FAFPanel extends JPanel {
 		attemptsLeft = x * y + 10;
 		numPairsLeft = (x * y) / 2;
 		result = generateRandom2DArray();
-		mode = createField(38, 30, 250, 90, gameMode);
+		time = createField(38, 30, 250, 90, "" + timeLeft);
 		attempts = createField(317, 30, 370, 90, "Attempts: " + attemptsLeft);
 		pairsLeft = createField(691, 30, 370, 90, "Pairs left: " + numPairsLeft);
-		menu = new JButton("Button 3");
-
-		menu.setBounds(1090, 30, 250, 90);
+		point = createField(1090, 30, 250, 90, "Point: " + numPoint);
 
 		cards = createCard();
 		for (JButton item : cards) {
@@ -70,10 +71,26 @@ public class FAFPanel extends JPanel {
 			}
 		});
 
-		this.add(mode);
+		timer3 = new Timer(1000, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				timeLeft--;
+				if (timeLeft >= 0) {
+					time.setText("Time Left: " + timeLeft);
+				} else {
+					for (JButton card : cards) {
+						card.setEnabled(false);
+					}
+					timer3.stop();
+					time.setText("Ready");
+				}
+			}
+		});
+		timer3.start();
+		this.add(time);
 		this.add(attempts);
 		this.add(pairsLeft);
-		this.add(menu);
+		this.add(point);
 
 	}
 
@@ -138,8 +155,11 @@ public class FAFPanel extends JPanel {
 					attemptsLeft -= 1;
 					attempts.setText("Attempts: " + attemptsLeft);
 					if (selected.getText().trim().equalsIgnoreCase(current.getText().trim())) {
+						numPoint += 40;
 						numPairsLeft -= 1;
 						pairsLeft.setText("Pairs left: " + numPairsLeft);
+						point.setText("Point: " + numPoint);
+
 						current.setIcon(
 								new ImageIcon(getClass().getResource("/Images/" + current.getText().trim() + ".png")));
 						current.setEnabled(false);
@@ -147,9 +167,10 @@ public class FAFPanel extends JPanel {
 						selected = null;
 						if (numPairsLeft == 0) {
 							pairsLeft.setText("May thang roaiiiiii");
-							return;
 						}
 					} else {
+						numPoint -= 50;
+						point.setText("Point: " + numPoint);
 						current.setIcon(
 								new ImageIcon(getClass().getResource("/Images/" + current.getText().trim() + ".png")));
 						timer1.start();
