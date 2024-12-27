@@ -40,7 +40,7 @@ public class FAFPanel extends JPanel {
 		int[] amountOfLevel = amountImagePerLevel[getIOfGameMode];
 		this.x = amountOfLevel[0];
 		this.y = amountOfLevel[1];
-		
+
 		attemptsLeft = x * y + 10;
 		numPairsLeft = (x * y) / 2;
 		result = generateRandom2DArray();
@@ -178,10 +178,5 @@ public class FAFPanel extends JPanel {
 		}
 
 		return result;
-	}
-
-	public int random() {
-		Random randomNum = new Random();
-		return randomNum.nextInt(x * y / 2);
 	}
 }
