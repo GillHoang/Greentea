@@ -19,7 +19,7 @@ public class Main extends JFrame {
 		cardPanel.add(new Login(cardLayout, cardPanel), "login");
 		cardPanel.add(new Play(), "main");
 		
-		add(cardPanel);
+		this.add(cardPanel);
 		
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setResizable(false);

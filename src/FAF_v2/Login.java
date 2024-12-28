@@ -1,6 +1,7 @@
 package FAF_v2;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,10 +22,17 @@ public class Login extends JPanel {
 	public Login(CardLayout cardLayout, JPanel cardPanel) {
 		super(null);
 		Font font = new Font("Tahoma", Font.BOLD, 30);
+		Font font2 = new Font("Tahoma", Font.BOLD, 120);
 
+		JLabel labelGameName = new JLabel("Flip and Find");
+		labelGameName.setBounds(302, 30, 789, 164);
+		labelGameName.setFont(font2);
+		labelGameName.setForeground(Color.decode("#00FF9C"));
+		
 		JLabel labelUsername = new JLabel("Username: ");
 		labelUsername.setBounds(605, 211, 183, 39);
 		labelUsername.setFont(font);
+		labelUsername.setForeground(Color.decode("#15B392"));
 
 		userField = new JTextField();
 		userField.setBounds(510, 268, 361, 70);
@@ -33,6 +41,7 @@ public class Login extends JPanel {
 		JLabel labelPassword = new JLabel("Password: ");
 		labelPassword.setBounds(605, 355, 172, 41);
 		labelPassword.setFont(font);
+		labelPassword.setForeground(Color.decode("#15B392"));
 
 		passField = new JPasswordField();
 		passField.setBounds(510, 414, 361, 70);
@@ -42,6 +51,7 @@ public class Login extends JPanel {
 		loginButton.setBounds(510, 502, 361, 70);
 		loginButton.setFont(font);
 
+		this.add(labelGameName);
 		this.add(loginButton);
 		this.add(labelUsername);
 		this.add(labelPassword);

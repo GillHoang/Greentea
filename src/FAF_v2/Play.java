@@ -33,7 +33,11 @@ public class Play extends JPanel {
 	int numPairsLeft;
 	int numPoint = 1000;
 	int timeLeft = 60;
-
+	int timeToHide = 1000;
+	int timePerRefesh = 1000;
+	int pointAdd = 50;
+	int pointSub = 40;
+	
 	public Play() {
 		super(null);
 
@@ -45,7 +49,7 @@ public class Play extends JPanel {
 		attemptsLeft = x * y + 10;
 		numPairsLeft = (x * y) / 2;
 		result = generateRandom2DArray();
-		time = createField(38, 30, 250, 90, "" + timeLeft);
+		time = createField(38, 30, 250, 90, "Time Left: " + timeLeft);
 		attempts = createField(317, 30, 370, 90, "Attempts: " + attemptsLeft);
 		pairsLeft = createField(691, 30, 370, 90, "Pairs left: " + numPairsLeft);
 		point = createField(1090, 30, 250, 90, "Point: " + numPoint);
@@ -55,7 +59,7 @@ public class Play extends JPanel {
 			this.add(item);
 		}
 
-		timer1 = new Timer(1000, new ActionListener() {
+		timer1 = new Timer(timeToHide, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (selected != null) {
@@ -71,7 +75,7 @@ public class Play extends JPanel {
 			}
 		});
 
-		timer3 = new Timer(1000, new ActionListener() {
+		timer3 = new Timer(timePerRefesh, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				timeLeft--;
@@ -155,7 +159,7 @@ public class Play extends JPanel {
 					attemptsLeft -= 1;
 					attempts.setText("Attempts: " + attemptsLeft);
 					if (selected.getText().trim().equalsIgnoreCase(current.getText().trim())) {
-						numPoint += 40;
+						numPoint += pointAdd;
 						numPairsLeft -= 1;
 						pairsLeft.setText("Pairs left: " + numPairsLeft);
 						point.setText("Point: " + numPoint);
@@ -169,7 +173,7 @@ public class Play extends JPanel {
 							pairsLeft.setText("May thang roaiiiiii");
 						}
 					} else {
-						numPoint -= 50;
+						numPoint -= pointSub;
 						point.setText("Point: " + numPoint);
 						current.setIcon(
 								new ImageIcon(getClass().getResource("/Images/" + current.getText().trim() + ".png")));
